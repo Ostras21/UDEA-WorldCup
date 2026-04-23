@@ -1,0 +1,15 @@
+*.o
+*.obj
+*.exe
+build/
+build-*/
+Makefile
+Makefile.*
+*.pro.user
+*.pro.user.*
+.qmake.stash
+.qtcreator/
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
