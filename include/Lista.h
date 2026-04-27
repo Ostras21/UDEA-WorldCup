@@ -3,26 +3,7 @@
 
 #include <stdexcept>
 
-/*
- * Plantilla Lista<T>
- * --------------------------------------------------------------
- * Contenedor propio basado en arreglo dinamico. Reemplaza a todos
- * los contenedores de la STL (prohibidos por el enunciado).
- *
- * Decisiones de diseño:
- *  - Arreglo dinamico redimensionable porque en la mayoria de usos
- *    el tamaño es conocido y se requiere acceso por indice en O(1).
- *  - Crecimiento exponencial (capacidad * 2) para mantener amortizado
- *    el costo de agregar elementos.
- *  - Implementa la REGLA DE LOS TRES: constructor de copia,
- *    operator= y destructor, pues maneja memoria dinamica.
- *  - Se sobrecarga operator[] para acceso tipo arreglo.
- *
- * Instanciaciones previstas en el proyecto:
- *   Lista<Equipo*>, Lista<Jugador>, Lista<Partido*>,
- *   Lista<RegistroJugadorPartido>, Lista<int>, etc.
- * --------------------------------------------------------------
- */
+
 template <class T>
 class Lista {
 private:

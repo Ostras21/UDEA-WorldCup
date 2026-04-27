@@ -9,6 +9,8 @@ Makefile.*
 *.pro.user.*
 .qmake.stash
 .qtcreator/
+.claude/
+*.autosave
 Thumbs.db
 .DS_Store
 .vscode/

@@ -1,145 +1,123 @@
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
 #include "Lista.h"
 #include "Fecha.h"
 #include "Confederacion.h"
 #include "EstadisticaJugador.h"
+#include "EstadisticaEquipo.h"
+#include "Jugador.h"
+#include "Equipo.h"
+#include "MedidorRecursos.h"
+#include "RegistroJugadorPartido.h"
+#include "EstadisticaPartido.h"
+#include "Bombo.h"
+#include "Partido.h"
+#include "Grupo.h"
+#include "Torneo.h"
 
-/*
- * main.cpp
- * --------------------------------------------------------------
- * Programa de prueba para las clases implementadas hasta ahora:
- *   - Lista<T>           (plantilla propia con memoria dinamica)
- *   - Fecha              (aritmetica de dias, comparaciones)
- *   - Confederacion      (identificacion por codigo)
- *   - EstadisticaJugador (operator+= sobrecargado)
- *
- * El main definitivo desplegara el menu de funcionalidades del
- * torneo (carga de datos, sorteo, simulaciones, informe final,
- * medicion de recursos). Aqui solo se ejercitan las clases base.
- * --------------------------------------------------------------
- */
 
-void imprimirTitulo(const std::string& titulo) {
-    std::cout << "\n=====================================================\n";
-    std::cout << " " << titulo << "\n";
-    std::cout << "=====================================================\n";
-}
+static void imprimirMenu() {
 
-// ---------- Pruebas de la plantilla Lista<T> ----------
-void probarLista() {
-    imprimirTitulo("Prueba de Lista<T>");
-
-    Lista<int> numeros;
-    for (int i = 1; i <= 5; ++i) {
-        numeros.agregar(i * 10);
-    }
-
-    std::cout << "Tamano inicial: " << numeros.getTamano() << "\n";
-    std::cout << "Elementos: ";
-    for (int i = 0; i < numeros.getTamano(); ++i) {
-        std::cout << numeros[i] << " ";
-    }
-    std::cout << "\n";
-
-    // Probar eliminacion
-    numeros.eliminar(2);
-    std::cout << "Tras eliminar indice 2: ";
-    for (int i = 0; i < numeros.getTamano(); ++i) {
-        std::cout << numeros[i] << " ";
-    }
-    std::cout << "\n";
-
-    // Probar constructor de copia (Regla de los Tres)
-    Lista<int> copia(numeros);
-    copia.agregar(999);
-    std::cout << "Original tras copia: ";
-    for (int i = 0; i < numeros.getTamano(); ++i) std::cout << numeros[i] << " ";
-    std::cout << "\nCopia (con 999 anadido): ";
-    for (int i = 0; i < copia.getTamano(); ++i) std::cout << copia[i] << " ";
-    std::cout << "\n";
-
-    // Probar operator=
-    Lista<int> asignada;
-    asignada = numeros;
-    asignada.agregar(-1);
-    std::cout << "Asignada (con -1 anadido): ";
-    for (int i = 0; i < asignada.getTamano(); ++i) std::cout << asignada[i] << " ";
-    std::cout << "\n";
-    std::cout << "Original intacta: ";
-    for (int i = 0; i < numeros.getTamano(); ++i) std::cout << numeros[i] << " ";
-    std::cout << "\n";
-}
-
-//   Pruebas de Fecha
-void probarFecha() {
-    imprimirTitulo("Prueba de Fecha");
-
-    Fecha inicioGrupos(20, 6, 2026);
-    Fecha finGrupos(8, 7, 2026);
-
-    std::cout << "Inicio fase de grupos: " << inicioGrupos << "\n";
-    std::cout << "Fin fase de grupos:    " << finGrupos << "\n";
-    std::cout << "Duracion (dias): " << finGrupos.diferenciaDias(inicioGrupos) << "\n";
-
-    // Avanzar dias
-    Fecha partido3 = inicioGrupos.avanzar(3);
-    std::cout << "Inicio + 3 dias = " << partido3 << "\n";
-
-    // Cruce de mes
-    Fecha cruceMes = inicioGrupos.avanzar(15);
-    std::cout << "Inicio + 15 dias = " << cruceMes << "\n";
-
-    // Comparaciones
-    std::cout << "inicio < fin ? " << (inicioGrupos < finGrupos ? "SI" : "NO") << "\n";
-    std::cout << "inicio == (20/6/2026) ? "
-              << (inicioGrupos == Fecha(20,6,2026) ? "SI" : "NO") << "\n";
-}
-
-// ---------- Pruebas de Confederacion ----------
-void probarConfederacion() {
-    imprimirTitulo("Prueba de Confederacion");
-
-    Confederacion uefa("Union de Asociaciones Europeas de Futbol", "UEFA");
-    Confederacion conmebol("Confederacion Sudamericana de Futbol", "CONMEBOL");
-    Confederacion otraUefa("UEFA-duplicado", "UEFA");
-
-    std::cout << "C1: " << uefa << "\n";
-    std::cout << "C2: " << conmebol << "\n";
-    std::cout << "uefa == conmebol ? " << (uefa == conmebol ? "SI" : "NO") << "\n";
-    std::cout << "uefa == otraUefa ? " << (uefa == otraUefa ? "SI" : "NO")
-              << " (comparacion por codigo)\n";
-}
-
-// ---------- Pruebas de EstadisticaJugador ----------
-void probarEstadisticaJugador() {
-    imprimirTitulo("Prueba de EstadisticaJugador");
-
-    EstadisticaJugador historico;
-    std::cout << "Historico inicial: " << historico << "\n";
-
-    // Simular 3 partidos
-    historico.acumularPartido(1, 90, 1, 0, 2, 0);  // partido 1
-    historico.acumularPartido(2, 90, 0, 0, 1, 1);  // partido 2
-    historico.acumularPartido(0, 120, 2, 1, 3, 0); // partido 3 con prorroga
-
-    std::cout << "Tras 3 partidos:   " << historico << "\n";
-
-    // Probar operator+=
-    EstadisticaJugador otro(2, 3, 180, 1, 0, 0, 4);
-    historico += otro;
-    std::cout << "Tras += con otra estadistica: " << historico << "\n";
+    std::cout << "   UdeAWorldCup - Menu\n";
+    std::cout << "-------------------------------'\n";
+    std::cout << "1. Cargar / actualizar datos\n";
+    std::cout << "2. Conformar grupos\n";
+    std::cout << "3. Simular fase de grupos y eliminatorias\n";
+    std::cout << "4. Generar informe estadistico final\n";
+    std::cout << "5. Mostrar consumo de recursos del ultimo bloque\n";
+    std::cout << "6. Persistir estadisticas a archivo\n";
+    std::cout << "7. Salir\n";
+    std::cout << "-----------------------------------------\n";
+    std::cout << "Opcion: ";
 }
 
 int main() {
-    std::cout << "UdeAWorldCup - Prueba de clases base\n";
+    Torneo torneo;
+    bool datosCargados     = false;
+    bool gruposConformados = false;
+    bool partidosSimulados = false;
 
-    probarLista();
-    probarFecha();
-    probarConfederacion();
-    probarEstadisticaJugador();
+    bool salir = false;
+    while (!salir) {
+        imprimirMenu();
 
-    std::cout << "\nPruebas finalizadas correctamente.\n";
+        int opcion = 0;
+        if (!(std::cin >> opcion)) {
+            std::cout << "\n[fin de entrada] saliendo.\n";
+            break;
+        }
+
+        try {
+            switch (opcion) {
+                case 1: {
+                    torneo.cargarDatos("data/selecciones_clasificadas_mundial.csv");
+                    datosCargados = true;
+                    std::cout << "OK Cargados "
+                              << torneo.getEquipos().getTamano() << " equipos y "
+                              << torneo.getConfederaciones().getTamano()
+                              << " confederaciones.\n";
+                    break;
+                }
+                case 2: {
+                    if (!datosCargados) {
+                        std::cout << "REQUISITO Primero ejecute la opcion 1 (cargar datos).\n";
+                        break;
+                    }
+                    torneo.conformarBombos();
+                    torneo.sortearGrupos();
+                    gruposConformados = true;
+                    break;
+                }
+                case 3: {
+                    if (!gruposConformados) {
+                        std::cout << "REQUISITO Primero ejecute la opcion 2 (conformar grupos).\n";
+                        break;
+                    }
+                    torneo.generarPartidosFaseGrupos();
+                    torneo.asignarFechasFaseGrupos();
+                    torneo.simularFaseGrupos();
+                    torneo.clasificarYEmparejar();
+                    torneo.simularEliminatoria();
+                    partidosSimulados = true;
+                    break;
+                }
+                case 4: {
+                    if (!partidosSimulados) {
+                        std::cout << "REQUISITO Primero ejecute la opcion 3 (simular).\n";
+                        break;
+                    }
+                    torneo.generarInformeFinal();
+                    break;
+                }
+                case 5: {
+                    torneo.getMedidor().reportar("Estado actual del medidor");
+                    break;
+                }
+                case 6: {
+                    if (!partidosSimulados) {
+                        std::cout << "REQUISITO Primero ejecute la opcion 3 (simular).\n";
+                        break;
+                    }
+                    std::string ruta = "data/jugadores_finales.csv";
+                    torneo.persistirJugadores(ruta);
+                    break;
+                }
+                case 7: {
+                    salir = true;
+                    break;
+                }
+                default: {
+                    std::cout << "ERROR Opcion invalida (use 1..7).\n";
+                    break;
+                }
+            }
+        } catch (const std::exception& ex) {
+            std::cout << "EXCEPCION " << ex.what() << "\n";
+        }
+    }
+
+    std::cout << "\nHasta luego.\n";
     return 0;
 }

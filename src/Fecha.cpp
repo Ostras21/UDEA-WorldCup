@@ -1,6 +1,6 @@
 #include "Fecha.h"
 
-// ------------------ Metodos auxiliares estaticos ------------------
+//  Metodos auxiliares estaticos
 
 bool Fecha::esBisiesto(int anio) {
     // Regla gregoriana: divisible por 4, excepto los multiplos de 100,
@@ -62,20 +62,20 @@ Fecha Fecha::desdeSerial(long serial) {
     return Fecha(d, m, a);
 }
 
-// ------------------ Constructores ------------------
+//  Constructores
 
 Fecha::Fecha() : dia(1), mes(1), anio(2026) {}
 
 Fecha::Fecha(int dia, int mes, int anio)
     : dia(dia), mes(mes), anio(anio) {}
 
-// ------------------ Getters ------------------
+//  Getters
 
 int Fecha::getDia()  const { return dia; }
 int Fecha::getMes()  const { return mes; }
 int Fecha::getAnio() const { return anio; }
 
-// ------------------ Aritmetica ------------------
+//  Aritmetica
 
 int Fecha::diferenciaDias(const Fecha& otra) const {
     return static_cast<int>(this->aSerial() - otra.aSerial());
@@ -86,7 +86,7 @@ Fecha Fecha::avanzar(int n) const {
     return desdeSerial(serial);
 }
 
-// ------------------ Comparaciones ------------------
+// Comparaciones
 
 bool Fecha::operator==(const Fecha& otra) const {
     return dia == otra.dia && mes == otra.mes && anio == otra.anio;
@@ -102,7 +102,7 @@ bool Fecha::operator<=(const Fecha& otra) const {
     return (*this < otra) || (*this == otra);
 }
 
-// ------------------ Impresion (funcion amiga) ------------------
+//  Impresion (funcion amiga)
 
 std::ostream& operator<<(std::ostream& salida, const Fecha& f) {
     // Formato dd/mm/aaaa con ceros a la izquierda para dia y mes.
