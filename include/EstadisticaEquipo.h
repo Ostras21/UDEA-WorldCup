@@ -3,28 +3,7 @@
 
 #include <iostream>
 
-/*
- * Clase EstadisticaEquipo
- * --------------------------------------------------------------
- * Encapsula el historial estadistico de un equipo:
- *   - goles a favor / en contra
- *   - partidos ganados / empatados / perdidos
- *   - tarjetas amarillas / rojas
- *   - faltas
- *
- * Despues de cada partido del torneo se acumulan los datos del
- * encuentro al historico mediante operator+= o el metodo
- * acumularPartido (este ultimo se usa hasta que exista
- * EstadisticaPartido como clase aparte).
- *
- * Decisiones de diseño:
- *  - No maneja memoria dinamica.
- *  - Sobrecarga operator+= (otro requisito de operadores cumplido).
- *  - operator<< como funcion amiga.
- *  - Provee promedios goleadores que el Torneo necesita para
- *    aplicar la ecuacion (1) de simulacion de partidos.
- * --------------------------------------------------------------
- */
+
 class EstadisticaEquipo {
 private:
     int golesFavor;

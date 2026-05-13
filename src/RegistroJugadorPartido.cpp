@@ -14,7 +14,7 @@ RegistroJugadorPartido::RegistroJugadorPartido(Jugador* jugador, int goles, int 
     : jugador(jugador), golesPartido(goles), minutosJugados(minutos),
       amarillas(amarillas), rojas(rojas), faltas(faltas), asistencias(asistencias) {}
 
-// ---------- Getters ----------
+// Getters
 Jugador* RegistroJugadorPartido::getJugador()    const { return jugador; }
 int RegistroJugadorPartido::getGolesPartido()    const { return golesPartido; }
 int RegistroJugadorPartido::getMinutosJugados()  const { return minutosJugados; }
@@ -23,7 +23,7 @@ int RegistroJugadorPartido::getRojas()           const { return rojas; }
 int RegistroJugadorPartido::getFaltas()          const { return faltas; }
 int RegistroJugadorPartido::getAsistencias()     const { return asistencias; }
 
-// ---------- Setters ----------
+//Setters
 void RegistroJugadorPartido::setJugador(Jugador* j)    { jugador = j; }
 void RegistroJugadorPartido::setGolesPartido(int v)    { golesPartido = v; }
 void RegistroJugadorPartido::setMinutosJugados(int v)  { minutosJugados = v; }
@@ -32,7 +32,7 @@ void RegistroJugadorPartido::setRojas(int v)           { rojas = v; }
 void RegistroJugadorPartido::setFaltas(int v)          { faltas = v; }
 void RegistroJugadorPartido::setAsistencias(int v)     { asistencias = v; }
 
-// ---------- Acumulacion ----------
+//  Acumulacion
 void RegistroJugadorPartido::agregarGol()        { ++golesPartido; }
 void RegistroJugadorPartido::agregarAmarilla()   { ++amarillas; }
 void RegistroJugadorPartido::agregarRoja()       { ++rojas; }

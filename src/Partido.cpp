@@ -20,7 +20,7 @@
 // Bloque 4 surge la necesidad de seed configurable para depurar,
 // se cambia aqui en un solo punto.
 static std::mt19937& rngPartido() {
-    static std::mt19937 g(std::random_device{}());
+    static std::mt19937 g(42);
     return g;
 }
 

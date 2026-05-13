@@ -8,7 +8,7 @@
 
 
 static std::mt19937& rngTorneo() {
-    static std::mt19937 g(std::random_device{}());
+    static std::mt19937 g(42);
     return g;
 }
 

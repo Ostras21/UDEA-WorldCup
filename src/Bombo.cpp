@@ -1,12 +1,8 @@
 #include "Bombo.h"
 #include <random>
 
-// RNG estatico compartido por todas las instancias de Bombo.
-// Se siembra una sola vez con std::random_device para garantizar
-// sorteos no reproducibles (a diferencia del simulador de partido,
-// donde podria interesar una seed fija para depurar).
 static std::mt19937& rngBombo() {
-    static std::mt19937 generador(std::random_device{}());
+    static std::mt19937 generador(42);
     return generador;
 }
 

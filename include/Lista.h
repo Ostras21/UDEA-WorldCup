@@ -25,7 +25,7 @@ private:
     }
 
 public:
-    // ---------- Constructores / Destructor (Regla de los Tres) ----------
+    //  Constructores / Destructor (Regla de los Tres)
 
     // Constructor por defecto: capacidad inicial minima.
     Lista() : datos(nullptr), tamano(0), capacidad(0) {
@@ -60,7 +60,7 @@ public:
         return *this;
     }
 
-    // ---------- Operaciones principales ----------
+    //  Operaciones principales
 
     // Agrega un elemento al final. Duplica capacidad si es necesario.
     void agregar(const T& elemento) {
@@ -97,7 +97,7 @@ public:
         return datos[indice];
     }
 
-    // ---------- Consultas ----------
+    //  Consultas
 
     int getTamano() const { return tamano; }
     int getCapacidad() const { return capacidad; }

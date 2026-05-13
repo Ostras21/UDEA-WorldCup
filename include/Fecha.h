@@ -3,25 +3,7 @@
 
 #include <iostream>
 
-/*
- * Clase Fecha
- * --------------------------------------------------------------
- * Representa una fecha calendario (dia, mes, anio) y provee la
- * aritmetica necesaria para la asignacion de partidos del torneo:
- *   - diferencia en dias entre dos fechas
- *   - avanzar N dias
- *   - comparaciones (==, <)
- *   - impresion con operator<< (funcion amiga)
- *
- * Decisiones de diseño:
- *  - No maneja memoria dinamica, por lo que NO requiere Regla
- *    de los Tres (constructor/destructor/operator= sinteticos
- *    del compilador son suficientes).
- *  - Se usa dia juliano simplificado para calcular diferencias:
- *    se convierte la fecha a un numero serial y se opera sobre el.
- *  - operator<< se declara amiga pues ostream no es miembro.
- * --------------------------------------------------------------
- */
+
 class Fecha {
 private:
     int dia;

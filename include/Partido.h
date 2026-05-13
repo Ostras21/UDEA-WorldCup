@@ -56,7 +56,7 @@ public:
     // prorroga (ver doc-comment de la clase).
     void simular(bool eliminatoria);
 
-    // ---------- Consultas tras simulacion ----------
+    //  Consultas tras simulacion
     Equipo* getGanador()  const;   // nullptr si empate o sin simular
     bool    fueEmpate()   const;
     Lista<RegistroJugadorPartido> getGoleadores() const;

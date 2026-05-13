@@ -2,13 +2,13 @@
 
 MedidorRecursos::MedidorRecursos() : iteraciones(0), memoriaBytes(0) {}
 
-// ---------- Iteraciones ----------
+//  Iteraciones
 void MedidorRecursos::registrarIteracion()       { ++iteraciones; }
 void MedidorRecursos::registrarIteraciones(long n) { iteraciones += n; }
 long MedidorRecursos::getIteraciones() const     { return iteraciones; }
 void MedidorRecursos::resetIteraciones()         { iteraciones = 0; }
 
-// ---------- Memoria ----------
+//  Memoria
 void MedidorRecursos::registrarMemoria(long bytes) { memoriaBytes += bytes; }
 void MedidorRecursos::liberarMemoria(long bytes) {
     memoriaBytes -= bytes;
@@ -16,7 +16,7 @@ void MedidorRecursos::liberarMemoria(long bytes) {
 }
 long MedidorRecursos::getMemoriaBytes() const { return memoriaBytes; }
 
-// ---------- Reporte ----------
+// reporte
 void MedidorRecursos::reportar(const std::string& funcionalidad) const {
     // Conversion legible: bytes / KB / MB segun la magnitud.
     double valor = static_cast<double>(memoriaBytes);

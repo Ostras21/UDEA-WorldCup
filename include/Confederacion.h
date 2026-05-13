@@ -4,25 +4,7 @@
 #include <string>
 #include <iostream>
 
-/*
- * Clase Confederacion
- * --------------------------------------------------------------
- * Agrupa a los equipos por ubicacion geografica (UEFA, CONMEBOL,
- * CONCACAF, CAF, AFC, OFC).
- *
- * Responsabilidad principal:
- *  - Identificar la confederacion a la que pertenece un equipo.
- *  - Permite aplicar las restricciones del sorteo de grupos:
- *    no se permiten dos selecciones de la misma confederacion
- *    en el mismo grupo, salvo UEFA (maximo dos).
- *
- * Decisiones de diseño:
- *  - No posee memoria dinamica -> no requiere Regla de los Tres.
- *  - Se incluye operator== para comparar confederaciones por codigo
- *    durante la validacion del sorteo.
- *  - operator<< declarado amigo para imprimir en una sola linea.
- * --------------------------------------------------------------
- */
+
 class Confederacion {
 private:
     std::string nombre;   // Nombre largo: "Union Europea de Futbol Asociacion"

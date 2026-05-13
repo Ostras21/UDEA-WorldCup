@@ -3,11 +3,9 @@
 #include <stdexcept>
 #include <random>
 
-// RNG estatico para el sorteo aleatorio que rompe igualdades en la
-// tabla cuando puntos, diferencia de goles y goles a favor coinciden.
-// Mismo patron usado en Bombo y Partido.
+// Mismo patron usado en bombo y partido
 static std::mt19937& rngGrupo() {
-    static std::mt19937 g(std::random_device{}());
+    static std::mt19937 g(42);
     return g;
 }
 
@@ -56,10 +54,8 @@ void Grupo::agregarPartido(Partido* p) {
     tablaCalculada = false;
 }
 
-// ---------- Tabla ----------
-//
-// Localiza el indice (0..3) de un equipo dentro de equipos[]
-// comparando por puntero. Devuelve -1 si no esta.
+//  Tabla
+
 static int indiceEquipo(const Lista<Equipo*>& eqs, const Equipo* e) {
     for (int i = 0; i < eqs.getTamano(); ++i) {
         if (eqs[i] == e) return i;
@@ -104,10 +100,7 @@ void Grupo::calcularTabla() {
         dgTabla[i] = gfTabla[i] - gcTabla[i];
     }
 
-    // Tiebreak aleatorio: una etiqueta por equipo. Si puntos, DG y GF
-    // coinciden entre dos, decide quien va arriba el menor de estos
-    // numeros (sorteo). Cada llamada a calcularTabla produce nuevas
-    // etiquetas: el sorteo se "vuelve a hacer" cada vez.
+
     int tieBreak[4];
     std::uniform_int_distribution<int> dist(0, 1000000);
     for (int i = 0; i < 4; ++i) tieBreak[i] = dist(rngGrupo());
